@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vortex - Linux ACL Management System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+            color: #000;
+            background-color: #fff;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .project-name {
+            font-size: xxx-large;
+        }
+
+        .project-subname {
+            text-align: center;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .banner {
+            max-width: 600px;
+            width: 100%;
+            height: auto;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            color: #000;
+            font-weight: normal;
+        }
+
+        .dark-mode h1 {
+            color: #fff;
+        }
+
+        h2 {
+            font-size: 1.6em;
+            margin: 30px 0 15px 0;
+            color: #000;
+            border-bottom: 1px solid #000;
+            padding-bottom: 8px;
+            font-weight: normal;
+        }
+
+        .dark-mode h2 {
+            color: #fff;
+            border-bottom: 1px solid #fff;
+        }
+
+        h3 {
+            font-size: 1.3em;
+            margin: 25px 0 10px 0;
+            color: #000;
+            font-weight: normal;
+        }
+
+        .dark-mode h3 {
+            color: #fff;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+            font-size: 1.05em;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.1em;
+            color: #000;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .dark-mode .subtitle {
+            color: #fff;
+        }
+
+        .authors {
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #000;
+        }
+
+        .dark-mode .authors {
+            color: #fff
+        }
+
+        .links-section {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .links-section h3 {
+            text-align: center;
+        }
+
+        .links-section p {
+            text-align: center;
+            display: inline-block;
+            margin: 0 15px 10px 15px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #2b6cb0;
+            color: white;
+            padding: 4px 8px;
+            font-size: 0.85em;
+            border-radius: 3px;
+            margin: 10px 0;
+        }
+
+        .team-member {
+            margin: 15px 0;
+        }
+
+        .team-member h4 {
+            color: #000;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+
+        .dark-mode .team-member h4 {
+            color: #fff;
+        }
+
+        .team-member p {
+            margin: 5px 0;
+            font-size: 1em;
+        }
+
+        .team-member a {
+            color: #0000EE;
+            text-decoration: underline;
+        }
+
+        .dark-mode .team-member a {
+            color: #6666FF;
+        }
+
+        .team-member a:hover {
+            text-decoration: none;
+        }
+
+        .team-member p {
+            margin: 5px 0;
+            font-size: 1em;
+        }
+
+        .tech-stack {
+            margin: 20px 0;
+        }
+
+        .tech-item {
+            margin: 8px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            color: #000;
+        }
+
+        .dark-mode .tech-item {
+            color: #fff;
+        }
+
+        .quote-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 0;
+        }
+
+        .quote-section .quote {
+            text-align: center;
+        }
+
+        .quote-section .quote-author {
+            text-align: center;
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 1.1em;
+            color: #000;
+            margin-bottom: 10px;
+        }
+
+        .dark-mode .quote {
+            color: #fff;
+        }
+
+        .quote-author {
+            font-weight: bold;
+            color: #000;
+            font-size: 0.95em;
+        }
+
+        .dark-mode .quote-author {
+            color: #fff;
+        }
+
+        .acknowledgment {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .acknowledgment p {
+            font-style: italic;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .acknowledgment p {
+            font-style: italic;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .footer {
+            text-align: center;
+            color: #000;
+            font-size: 0.95em;
+        }
+
+        .dark-mode .footer {
+            color: #fff;
+        }
+
+        strong {
+            color: #000;
+        }
+
+        .dark-mode strong {
+            color: #fff;
+        }
+
+        a {
+            color: #0000EE;
+            text-decoration: underline;
+        }
+
+        .dark-mode a {
+            color: #6666FF;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        /* Dark mode toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #000;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode .theme-toggle {
+            background: #fff;
+            color: #000;
+        }
+
+        .theme-toggle:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            h2 {
+                font-size: 1.4em;
+            }
+
+            .link-list {
+                flex-direction: column;
+            }
+
+            .link-item {
+                text-align: center;
+            }
+
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+
+        li {
+            margin: 8px 0;
+            font-size: 1.05em;
+        }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+    
+    <div class="header">
+        <h1 class="project-name">Vortex GSoC 2025</h1>
+        <p class="project-subname">Linux ACL Management System</p>
+        <p class="project-subname">Department of Biomedical Informatics, Emory University School of Medicine</p>
+        <img src="https://raw.githubusercontent.com/PythonHacker24/PythonHacker24/refs/heads/main/banner.png" alt="Project Banner" class="banner">
+        <p class="subtitle">A robust web-based management interface for Linux Access Control Lists (ACLs), designed to enhance data protection and simplify ACL administration. This project provides a modern, user-friendly solution for managing file system permissions in Linux environments.</p>
+        <div class="badge">MIT License</div>
+        <p class="authors">Aditya Patil • Mahmoud Zeydabadinezhad, Ph.D • Robert Tweedy</p>
+    </div>
+
+    <div class="links-section">
+        <h3>Link to Project's Resources</h3>
+        <p><a href="https://pythonhacker24.github.io/linux-acl-management/">View Documentation</a></p>
+        <p><a href="#">Accepted Proposal PDF</a></p>
+        <p><a href="#">GSoC Project Page</a></p>
+
+        <h3>Link to Project's GitHub Repositories</h3>
+        <p><a href="https://github.com/PythonHacker24/linux-acl-management-backend">Backend</a></p>
+        <p><a href="https://github.com/PythonHacker24/linux-acl-management-frontend">Frontend</a></p>
+        <p><a href="https://github.com/PythonHacker24/linux-acl-management-aclcore">ACL Core Daemon</a></p>
+        <p><a href="https://github.com/PythonHacker24/linux-acl-management-aclapi">ACL API Daemon</a></p>
+        <p><a href="https://github.com/PythonHacker24/linux-acl-management-docs">Docs</a></p>
+
+        <h3>Prototype (Before GSoC Period) Links (Legacy Code)</h3>
+        <p><a href="https://pythonhacker24.github.io/linux-acl-management/">Prototype Progress Docs</a></p>
+        <p><a href="https://github.com/PythonHacker24/linux-acl-management">Prototype Repository</a></p>
+    </div>
+
+    <section>
+        <h2>About the Contributor and Mentors</h2>
+        <p>This project is developed as part of Google Summer of Code 2025, in collaboration with the Department of Biomedical Informatics at Emory University.</p>
+
+        <div class="team-member">
+            <h4>Aditya Patil (Contributor)</h4>
+            <p>Email: adityapatil24680@gmail.com</p>
+            <p><a href="https://github.com/PythonHacker24">GitHub Profile</a></p>
+            <p><a href="https://www.linkedin.com/in/aditya-patil-260a631b2/">LinkedIn Profile</a></p>
+        </div>
+
+        <div class="team-member">
+            <h4>Mahmoud Zeydabadinezhad, Ph.D (Mentor)</h4>
+            <p>Email: zeydabadi@gmail.com</p>
+        </div>
+
+        <div class="team-member">
+            <h4>Robert Tweedy (Mentor)</h4>
+            <p>Email: robert.tweedy@emory.edu</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>Project Specifications</h2>
+        <p>Institutional departments, such as the Biomedical Informatics (BMI) Department of Emory University School of Medicine, manage vast amounts of data, often reaching petabyte scales across multiple Linux-based storage servers. Researchers storing data in these systems need a streamlined way to modify ACLs to grant or revoke access for collaborators. Currently, the IT team at BMI is responsible for manually handling these ACL modifications, which is time-consuming, error-prone, and inefficient, especially as data volume and user demands grow.</p>
+        
+        <p>To address this challenge at BMI and similar institutions worldwide, a Web Management Interface is needed to allow users to modify ACLs securely. This solution would eliminate the burden on IT teams by enabling on-demand permission management while ensuring security and reliability. The proposed system will feature a robust and highly configurable backend, high-speed databases, orchestration daemons for file storage servers, and an intuitive frontend.</p>
+
+        <div class="tech-stack">
+            <h3>Complete Tech Stack</h3>
+            <div class="tech-item"><strong>Backend Component:</strong> Go, gRPC, LDAP, Redis, PostgreSQL, Rocky Linux</div>
+            <div class="tech-item"><strong>Frontend Component:</strong> NextJS, TypeScript</div>
+            <div class="tech-item"><strong>ACL Core Component:</strong> Go, SystemD</div>
+            <div class="tech-item"><strong>ACL Daemon Component:</strong> Go, SystemD</div>
+            <div class="tech-item"><strong>Docs:</strong> MkDocs</div>
+            <div class="tech-item"><strong>Miscellaneous:</strong> Docker, Tarball, Shell Scripts, YAML, Protobuf, gRPC</div>
+            <p style="font-style: italic; margin-top: 15px;">During the GSoC period, components were built on macOS and tested extensively on Rocky Linux System.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>Work done by the Contributor</h2>
+
+        <h3>1. Introduction / Overview</h3>
+        <p>Vortex was designed to be a robust Linux ACL Management System capable of handling multiple file system servers and managing permissions for millions of files. This scalability and reliability were made possible through deliberate design decisions and a carefully chosen tech stack during the proposal phase.</p>
+        
+        <p>As part of GSoC 2025, a fully functional version (v1.1) was developed, providing organizations with a practical and production ready interface for deploying a Linux ACL Management System. The project followed a systematic approach: starting with requirement gathering in close collaboration with mentors, moving on to prototyping, validation, and iteration, then submitting a detailed proposal, and finally building the complete system.</p>
+
+        <h3>2. Project Architecture</h3>
+        <p>Vortex is composed of three major components: the backend, frontend, and daemons (deployed on file system servers). After discussions with mentors, it was decided to maintain these components in separate repositories instead of a monorepo, allowing for faster, more atomic, and independent development.</p>
+
+        <p><strong>Backend:</strong> The backend is the core of the system and the most critical component. It is responsible for orchestrating daemons, file system mounts, databases, and authentication; scheduling and processing transactions; ensuring fair, systematic scheduling across multiple cores; and maintaining reliability and consistency of the entire system.</p>
+
+        <p><strong>Frontend:</strong> The frontend provides the user-facing interface for requesting file permission changes. It allows users to submit permission change requests and delegates all privileged operations to the backend, operating with minimal or no direct infrastructure privileges.</p>
+
+        <p><strong>Daemons (ACL Core & ACL API):</strong> The daemon components run on the file system servers and are responsible for performing ACL modifications at the file level. They are deployed as systemd services, controlled entirely by the backend, and execute file level permission changes as instructed.</p>
+
+        <h3>3. Development Phase</h3>
+        <p><strong>Before Midterm:</strong> The backend and daemon components were developed and completed based on the best possible estimations of the frontend's requirements.</p>
+        
+        <p><strong>After Midterm:</strong> Development shifted towards the frontend, along with its integration with the backend, ensuring smooth interaction between the components.</p>
+        
+        <p><strong>Documentation:</strong> The Docs repository was maintained consistently throughout the process.</p>
+
+        <h3>4. Documentation</h3>
+        <p>All components of the project are thoroughly documented in the official Docs repository. The documentation provides up to date reference material for both users and developers, covering not only individual components but also the interactions and workflows between them.</p>
+
+        <h3>5. Summary</h3>
+        <p>A complete Linux ACL Management System named Vortex was planned, built, and shipped throughout the GSoC period with the guidance from my mentors. It was indeed a very well spent summer!</p>
+    </section>
+
+    <section>
+        <h2>Current State of the Project</h2>
+        <p>While submitting the final report of the project, Vortex is capable of handling file permissions of millions of files distributed across multiple Linux file system servers. It provides a user-friendly interface for users to change the permissions of files they own.</p>
+    </section>
+
+    <section>
+        <h2>Future Work</h2>
+        <p>During the GSoC 2025 period, a working v1.1 of the project was developed and successfully launched. This release includes all the essential features required for a Linux ACL Management System to operate in a production environment. While the foundation is strong, there remains significant scope for improvements, optimizations, and additional features that can make the project even more powerful and user-friendly.</p>
+        
+        <p>GSoC 2025 marked the birth of Vortex, and it will continue to be actively developed and maintained for the foreseeable future.</p>
+    </section>
+
+    <section>
+        <h2>Challenges and Learnings</h2>
+        <p>I officially kicked off this project the day I sent my first email to my mentors, 10 February 2025. Since then, I've been at it every single day. Some days were good, some went terrible. But if I had to capture the essence of my GSoC journey, the highs and the lows, I'd sum it up with three sections and quotes from the giants of computing who came before me.</p>
+
+        <h3>1. Premature Optimizations</h3>
+        <p>Before starting the project, I had well planned the timeline for each step of progress. The biggest challenge I faced which lagged me behind the timeline for a bit was during the phase where I got busy in optimizing everything to its core. At that time, I worked multiple hours, even on weekends to catch up with the timeline and over worked each and every module of the project.</p>
+
+        <div class="quote-section">
+            <p class="quote">"Premature optimization is the root of all evil (or at least most of it) in programming."</p>
+            <p class="quote-author">- Donald Knuth (From Structured Programming with go to Statements, 1974)</p>
+        </div>
+
+        <p>That experience taught me an important distinction: optimization does matter. Writing efficient, clean, and scalable code is essential for building good software. But there's a balance to maintain. The real challenge is knowing how much optimization is practical at a given stage.</p>
+
+        <h3>2. Writing Better Code than More Code</h3>
+        <p>Writing code every day and steadily filling up a repository can feel productive and signal progress. But sheer volume of code isn't the true measure of progress. Often, real progress comes from carefully reviewing the codebase, finding better approaches, and removing unnecessary complexity.</p>
+
+        <div class="quote-section">
+            <p class="quote">"One of my most productive days was throwing away 1000 lines of code."</p>
+            <p class="quote-author">- Ken Thompson (co-creator of Unix)</p>
+        </div>
+
+        <p>In fact, some of the most valuable commits are the ones with more deletions than additions. Fewer lines can mean cleaner design, easier maintenance, and better performance.</p>
+
+        <h3>3. Just Do It Approach</h3>
+        <p>When tackling a coding problem, the biggest challenge often isn't the problem itself, it's how we approach it. Two common traps appear on opposite ends of the spectrum: overthinking and underestimating. Both cases stem from the same root cause: insufficient experience.</p>
+
+        <div class="quote-section">
+            <p class="quote">"Talk is cheap. Show me the code."</p>
+            <p class="quote-author">- Linus Torvalds (creator of Linux)</p>
+        </div>
+
+        <p>Instead of waiting for the "perfect plan," write something. Anything that moves you forward. The act of coding itself sharpens your understanding, reveals hidden complexities, and builds the very experience you lacked at the start.</p>
+    </section>
+
+    <div class="acknowledgment">
+        <h2>Acknowledgement by Contributor</h2>
+        <p>"I am deeply grateful to Mahmoud Zeydabadinezhad for his invaluable support throughout my GSoC journey: from day one to the final submission. His guidance in steering me in the right direction, helping me navigate the complexities of the project, and arranging key meetings that clarified the process was instrumental to my success."</p>
+        
+        <p>"I am immensely grateful to Robert Tweedy for his patience, dedication, and unwavering support throughout my GSoC journey. His countless emails and thorough explanations ensured I had a clear understanding of the project at every stage. His mentorship has been instrumental in the successful completion of my GSoC."</p>
+        
+        <p>"Finally, I extend my gratitude to all the individuals who dedicate countless hours to open-source projects, contributing selflessly to the betterment of society."</p>
+    </div>
+
+    <div class="footer">
+        <h2>End Notes</h2>
+        <p>This GitHub Gist has been submitted as part of the final evaluation for GSoC 2025. The link will serve as a permanent reference in the GSoC archives. Please note that while the link itself will remain unchanged, the contents of the Gist may be updated in the future as required.</p>
+        <p><strong>Gist Authored by Aditya Patil. Reviewed by Mahmoud Zeydabadinezhad & Robert Tweedy.</strong></p>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        }
+
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+</body>
+</html>
